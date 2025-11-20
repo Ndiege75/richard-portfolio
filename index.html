@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Richard Ndiege - Portfolio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+    :root {
+         --bg:#f0f2f5; 
+         --text:#333; 
+         --card:#fff; 
+         --accent:#1e3d59; 
+         --link:#1e3d59;
+    }
+    [data-theme="dark"] { 
+        --bg:#111; 
+        --text:#e6e6e6; 
+        --card:#1f1f1f; 
+        --accent:#87cefa; 
+        --link:#87cefa; 
+    }
+    
+    * {
+        box-sizing:border-box; 
+        scroll-behavior:smooth;
+    }
+    body {
+        margin:0;
+        font-family:Segoe UI, Roboto, system-ui, Arial;
+        background:var(--bg);
+        color:var(--text);
+    }
+    header {
+        background:var(--accent);
+        color:#fff;
+        padding:24px 16px;
+        text-align:center;
+        position:relative;
+    }
+
+    header img.profile {
+        border-radius:50%;
+        width:110px;
+        height:110px;
+        object-fit:cover;
+        border:4px solid rgba(255,255,255,0.12);
+        display:inline-block;
+        vertical-align:middle
+    }
+    header h1 {
+        margin:8px 0 0;
+        font-size:1.8rem
+    }
+    header p { 
+        margin:6px 0 12px;
+        opacity:0.95
+    }
+
+    nav { 
+        margin-top:10px
+    }
+    nav a { 
+        color:#fff;
+        text-decoration:none;
+        margin:0 12px;
+        font-weight:600;
+        position:relative
+    }
+    #theme-toggle {
+        position:absolute;
+        right:18px;
+        top:18px;
+        background:transparent;
+        border:none;
+        font-size:20px;
+        cursor:pointer;
+        color:#fff
+    }
+    .container {
+        max-width:1000px;
+        margin:28px auto;
+        padding:0 16px 80px
+    }
+
+/* Sections */
+    section {
+        margin-bottom:40px
+    }
+    h2 {
+        color:var(--link);
+        margin-bottom:12px
+    }
+
+/* Cards grid */
+    .grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+        gap:18px
+    }
+
+/* Card style */
+    .card {
+        background:var(--card);
+        padding:18px;
+        border-radius:12px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.06);
+        transition:transform .25s,box-shadow .25s
+    }
+    .card:hover {
+        transform:translateY(-6px);
+        box-shadow:0 12px 30px rgba(0,0,0,0.10)
+    }
+    .small {
+        font-size:0.95rem;
+        color:var(--text);
+        line-height:1.5
+    }
+
+/* Skills */
+    .skills-container {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:16px
+    }
+    .skills-card h3 {
+        color:var(--link);
+        margin-bottom:8px
+    }
+    .skills-card ul {
+        padding-left:18px;
+        margin:0
+    }
+    .skills-card li {
+        margin-bottom:8px;
+        font-size:0.95rem
+    }
+
+/* Projects */
+    .filter-buttons {
+        text-align:center;
+        margin-bottom:12px
+    }
+    .filter-buttons button {
+        margin:5px;
+        padding:8px 12px;
+        border:none;
+        border-radius:5px;
+        background:var(--link);
+        color:#fff;
+        cursor:pointer
+    }
+    .projects-grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+        gap:20px
+    }
+    .project-card img {
+        width:100%;
+        height:150px;
+        object-fit:cover;
+        border-radius:12px;
+        margin-bottom:10px
+    }
+    .tools-used span {
+        display:inline-block;
+        background:#eef2f6;
+        padding:6px 8px;
+        border-radius:6px;
+        margin:3px;
+        font-size:0.85rem;
+        color:#222
+    }
+
+/* Services */
+    .services-list {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:14px
+    }
+    .service h4 {
+        margin-top:0;
+        color:var(--link)
+    }
+
+/* Blog */
+    .blog-card img {
+        width:100%;
+        height:160px;
+        object-fit:cover;
+        border-radius:8px;
+        margin-bottom:10px
+    }
+
+/* GitHub Stats */
+    .github-widgets {
+        text-align:center
+    }
+    .github-widgets img {
+        max-width:100%;
+        border-radius:10px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.06)
+    }
+
+/* Contact */
+    .contact-grid {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:18px
+    }
+    input,textarea,button {
+        width:100%;
+        padding:10px;
+        border-radius:8px;
+        border:1px solid #d1d7dd;
+        background:transparent
+    }
+    button {
+        background:var(--link);
+        color:#fff;
+        border:none;
+        padding:10px 12px;
+        cursor:pointer
+    }
+
+/* Footer */
+    footer {
+        background:var(--accent);
+        color:#fff;
+        text-align:center;
+        padding:12px;
+        position:fixed;
+        left:0;right:0;
+        bottom:0
+    }
+
+/* Loader & fade */
+    #loader {
+        position:fixed;
+        inset:0;
+        background:#fff;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:9999
+    }
+    .spinner {
+        width:50px;
+        height:50px;
+        border:6px solid var(--accent);
+        border-top-color:transparent;
+        border-radius:50%;
+        animation:spin 1s linear infinite
+    }
+    .fade-section {
+        opacity:0;
+        transform:translateY(18px);
+        transition:opacity .9s,transform .9s
+    }
+    .fade-section.visible {
+        opacity:1;
+        transform:translateY(0)
+    }
+    @keyframes spin {
+        to {
+            transform:rotate(360deg)
+           }
+    } 
+
+/* Responsive tweaks */
+@media (max-width:700px){
+  .skills-container{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  header h1{font-size:1.5rem}
+}
+    .social-icons {
+        display:flex;
+        gap:12px;
+        justify-content:center;
+        margin-top:10px
+    }
+    .social-icons a {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        width:36px;
+        height:36px;
+        border-radius:8px;
+        background:rgba(255,255,255,0.06);
+        color:#fff;
+        text-decoration:none;
+        font-weight:700
+    }
+    .resume-btn {
+        display:inline-block;
+        background:#fff;
+        color:var(--accent);
+        padding:8px 12px;
+        border-radius:8px;
+        text-decoration:none;
+        font-weight:700;
+        margin-top:8px
+      }
+     </style>
+     
+   </head>
+
+<body>
+  <div id="loader"><div class="spinner"></div></div>
+
+  <header>
+    <img src="Richard-Portfolio.jpg" alt="Bouncing" class="bounce" width="120">
+    <button id="theme-toggle" aria-label="Toggle theme"></button>
+    <h1>Richard Ndiege</h1>
+    <p>Aspiring Data Scientist | Analyst | Innovator</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
+      <a href="#blog">Blog</a>
+      <a href="#github">GitHub</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="social-icons" style="margin-top:12px">
+      <a href="https://www.linkedin.com/in/richard-otieno-1997ba246" target="_blank" title="LinkedIn">in</a>
+      <a href="https://github.com/Ndiege75" target="_blank" title="GitHub">GH</a>
+      <a href="mailto:ndiegerichard75@gmail.com" title="Email">@</a>
+      <a href="https://wa.me/254759159461" target="_blank" title="WhatsApp">WA</a>
+    </div>
+    <div style="margin-top:10px">
+      <a class="resume-btn" href="Richard_Ndiege_Otieno_Curriculum_Vitae.pdf" download>Download Resume</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ABOUT -->
+    <section id="about" class="fade-section">
+      <h2>About Me</h2>
+      <div class="card">
+        <p class="small">Hello! I'm an Applied Statistics graduate from Kenya with a passion for using data and machine learning to solve real-world problems — from predictive models for housing prices to real-time ambulance route optimization using streaming data.</p>
+      </div>
+    </section>
+
+    <!-- PROJECTS (kept earlier as in your original layout) -->
+    <section id="projects" class="fade-section">
+      <h2>Projects</h2>
+
+      <div class="filter-buttons">
+        <button onclick="filterProjects('all')">All</button>
+        <button onclick="filterProjects('data')">Data</button>
+        <button onclick="filterProjects('web')">Web</button>
+        <button onclick="filterProjects('ai')">AI</button>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        <div class="project-card card" data-category="data">
+          <img src="https://via.placeholder.com/600x320.png?text=House+Price+Prediction" alt="House Price">
+          <h3>House Price Prediction</h3>
+          <p class="small">Predicting house prices in Nairobi using location, bedrooms, and plot size.</p>
+          <div class="tools-used"><span>Python</span> <span>Pandas</span> <span>Scikit-learn</span></div>
+        </div>
+
+        <div class="project-card card" data-category="data">
+          <img src="https://via.placeholder.com/600x320.png?text=Ambulance+Tracker" alt="Ambulance Tracker">
+          <h3>Ambulance Tracker (Big Data)</h3>
+          <p class="small">Real-time GPS + streaming data pipeline to optimize ambulance response times.</p>
+          <div class="tools-used"><span>Kafka</span> <span>Flask</span> <span>Mapbox</span></div>
+        </div>
+
+        <div class="project-card card" data-category="web">
+          <img src="https://via.placeholder.com/600x320.png?text=Student+Performance" alt="Student Performance">
+          <h3>Prediction of Student Performance</h3>
+          <p class="small">Model to predict student scores and recommend interventions to improve outcomes.</p>
+          <div class="tools-used"><span>SPSS</span> <span>R</span> <span>PowerBI</span></div>
+        </div>
+
+        <div class="project-card card" data-category="ai">
+          <img src="https://via.placeholder.com/600x320.png?text=Anti-Scam+Detection" alt="Anti-Scam">
+          <h3>Anti-Scam Detection</h3>
+          <p class="small">Anomaly detection and big data pipelines to flag fraudulent activity patterns.</p>
+          <div class="tools-used"><span>Python</span> <span>BigQuery</span> <span>TensorFlow</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="fade-section">
+      <h2>Skills</h2>
+      <div class="skills-container">
+        <div class="skills-card card">
+          <h3>Technical Skills</h3>
+          <ul>
+            <li>Python (Pandas, Numpy, Scikit-learn)</li>
+            <li>R Programming & SPSS</li>
+            <li>SQL (MySQL, PostgreSQL)</li>
+            <li>Machine Learning (Regression, Classification, Time Series)</li>
+            <li>TensorFlow & PyTorch (basics)</li>
+            <li>Power BI, Tableau, Excel</li>
+            <li>Big Data Tools (Kafka, BigQuery)</li>
+            <li>Flask, Django, Streamlit</li>
+            <li>Git & GitHub</li>
+          </ul>
+        </div>
+        <div class="skills-card card">
+          <h3>Soft Skills</h3>
+          <ul>
+            <li>Analytical Thinking</li>
+            <li>Problem Solving</li>
+            <li>Attention to Detail</li>
+            <li>Communication</li>
+            <li>Teamwork</li>
+            <li>Adaptability</li>
+            <li>Time Management</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="fade-section">
+      <h2>Services</h2>
+      <div class="services-list">
+        <div class="service card">
+          <h4>Data Analysis & Reporting</h4>
+          <p class="small">Actionable insights, exploratory data analysis and clear dashboards for decision-making.</p>
+        </div>
+        <div class="service card">
+          <h4>Machine Learning Solutions</h4>
+          <p class="small">Regression, classification and predictive modelling tailored to business problems.</p>
+        </div>
+        <div class="service card">
+          <h4>Dashboard & Visualization</h4>
+          <p class="small">Power BI / Tableau dashboards and automated reporting pipelines.</p>
+        </div>
+        <div class="service card">
+          <h4>Big Data Streaming</h4>
+          <p class="small">Real-time data pipelines using Kafka and Cloud services for urgent systems like ambulance tracking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="fade-section">
+      <h2>Blog & Articles</h2>
+      <div class="grid">
+        <article class="card blog-card">
+          <img src="https://via.placeholder.com/800x400.png?text=Big+Data+Traffic+Control" alt="Blog 1">
+          <h3>How Big Data Can Improve Traffic Control in Nairobi</h3>
+          <p class="small">An overview of real-time traffic analytics, predictive congestion models, and suggested architecture for city-wide deployment.</p>
+          <a href="#" style="font-weight:700;color:var(--link);text-decoration:none">Read more →</a>
+        </article>
+
+        <article class="card blog-card">
+          <img src="https://via.placeholder.com/800x400.png?text=House+Price+Model" alt="Blog 2">
+          <h3>Predicting House Prices: Approach, Features, and Lessons</h3>
+          <p class="small">A practical walk-through of features, model choices, and deployment tips from my Nairobi housing project.</p>
+          <a href="#" style="font-weight:700;color:var(--link);text-decoration:none">Read more →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- GITHUB -->
+    <section id="github" class="fade-section">
+      <h2>GitHub</h2>
+      <div class="card github-widgets">
+        <p class="small">Contributions and repository highlights for <strong>Ndiege75</strong>.</p>
+        <img src="https://github-readme-stats.vercel.app/api?username=Ndiege75&show_icons=true&theme=default" alt="GitHub Stats">
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="fade-section">
+      <h2>Contact</h2>
+      <div class="card contact-grid">
+        <div>
+          <p class="small"><strong>Email:</strong> ndiegerichard75@gmail.com</p>
+          <p class="small"><strong>Phone:</strong> +254 759 159 461</p>
+          <p class="small"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/richard-otieno-1997ba246" target="_blank">Richard Otieno</a></p>
+          <p class="small"><strong>GitHub:</strong> <a href="https://github.com/Ndiege75" target="_blank">Ndiege75</a></p>
+          <div style="margin-top:10px">
+            <a class="resume-btn" href="Richard_CV.pdf" download>Download Resume</a>
+          </div>
+        </div>
+
+        <div>
+          <!-- Contact form via Formspree — replace YOUR_FORM_ID with your actual ID -->
+            <form action="https://formspree.io/f/meonrgaq" method="POST">
+            <input type="text" name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Your email" required style="margin-top:8px">
+            <textarea name="message" rows="5" placeholder="Message" style="margin-top:8px" required></textarea>
+            <button type="submit" style="margin-top:10px">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>&copy; 2025 Richard Ndiege. All rights reserved.</footer>
+
+<script>
+  // loader
+  window.addEventListener('load',()=>document.getElementById('loader').style.display='none');
+
+  // theme
+  const btn=document.getElementById('theme-toggle');
+  const current = localStorage.getItem('theme');
+  if(current){document.documentElement.setAttribute('data-theme', current); btn.textContent = current==='dark' ? '☀️' : '🌙'}
+  btn.addEventListener('click', ()=>{
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  });
+
+  // fade-in sections
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible') });
+  }, {threshold:0.15});
+  document.querySelectorAll('.fade-section').forEach(s=>observer.observe(s));
+
+  // projects filter
+  function filterProjects(cat){
+    const cards = document.querySelectorAll('#projects-grid .project-card');
+    cards.forEach(c=> c.style.display = (cat==='all' || c.dataset.category===cat) ? 'block' : 'none');
+  }
+</script>
+</body>
+</html>
