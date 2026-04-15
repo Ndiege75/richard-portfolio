@@ -6,13 +6,13 @@
   <meta name="description" content="Richard Ndiege - Aspiring Data Scientist & Analyst Portfolio. Machine learning, data analytics, and real-time projects." />
   <meta name="author" content="Richard Ndiege Otieno" />
   <title>Richard Ndiege | Data Science Portfolio</title>
-  <!-- Favicon (simple emoji fallback) -->
+  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
-  <!-- Chart.js CDN for live charts -->
+  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <!-- Typed.js for animated header -->
+  <!-- Typed.js -->
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-  <!-- Particles background (lightweight) -->
+  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <style>
     * {
@@ -51,7 +51,6 @@
       line-height: 1.5;
     }
 
-    /* Particles container */
     #particles-js {
       position: fixed;
       top: 0;
@@ -63,7 +62,6 @@
       pointer-events: none;
     }
 
-    /* Scroll progress bar */
     #scroll-progress {
       position: fixed;
       top: 0;
@@ -73,7 +71,6 @@
       width: 0%;
       z-index: 10000;
       transition: width 0.08s linear;
-      box-shadow: 0 0 3px var(--accent);
     }
 
     header {
@@ -156,6 +153,13 @@
       display: inline-block;
       margin-top: 6px;
       transition: 0.2s;
+      cursor: pointer;
+      border: none;
+      font-size: 0.9rem;
+    }
+    .resume-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     .container { max-width: 1200px; margin: 40px auto; padding: 0 24px 80px; }
     section { margin-bottom: 64px; }
@@ -267,6 +271,15 @@
       h2 { font-size: 1.6rem; }
     }
     .chart-container { max-width: 100%; margin: 20px 0; height: 200px; }
+    .bounce {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -278,7 +291,7 @@
 
   <header>
     <button id="theme-toggle" aria-label="Dark/Light mode">🌙</button>
-    <img src="Richard-Portfolio.jpg" alt="Profile" style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover;" class="bounce">
+    <img src="Richard-Portfolio.jpg" alt="Richard Ndiege" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?background=1e3d59&color=fff&name=Richard+N'">
     <h1>Richard Ndiege</h1>
     <div><span id="typed-text"></span></div>
     <nav>
@@ -290,8 +303,9 @@
       <a href="https://github.com/Ndiege75" target="_blank">🐙 GH</a>
       <a href="mailto:ndiegerichard75@gmail.com">📧 Email</a>
       <a href="https://wa.me/254759159461" target="_blank">💬 WA</a>
+    </div>
     <div style="margin-top:10px">
-    <a class="resume-btn" href="Richard_Ndiege_Otieno_CV(1).pdf" download="Richard_Ndiege_Otieno_CV(1).pdf">📄 Download Resume (PDF)</a>
+      <a class="resume-btn" id="headerResumeBtn">📄 Download Resume (PDF)</a>
     </div>
   </header>
 
@@ -307,7 +321,7 @@
       </div>
     </section>
 
-    <!-- Projects with dynamic filtering + modal preview -->
+    <!-- Projects -->
     <section id="projects" class="fade-section">
       <h2>Featured Projects</h2>
       <div class="filter-buttons" id="filterWrapper">
@@ -319,7 +333,7 @@
       <div class="projects-grid" id="projectsGrid"></div>
     </section>
 
-    <!-- Skills with progress bars -->
+    <!-- Skills -->
     <section id="skills" class="fade-section">
       <h2>Technical Proficiency</h2>
       <div class="skills-container">
@@ -351,7 +365,7 @@
       </div>
     </section>
 
-    <!-- Blog Preview -->
+    <!-- Blog -->
     <section id="blog" class="fade-section">
       <h2>Insights & Articles</h2>
       <div class="projects-grid">
@@ -371,16 +385,16 @@
       </div>
     </section>
 
-    <!-- Contact + Map / Form -->
+    <!-- Contact -->
     <section id="contact" class="fade-section">
       <h2>Let's Connect</h2>
       <div class="contact-grid">
         <div class="card">
           <p><strong>📧 ndiegerichard75@gmail.com</strong></p>
           <p><strong>📞 +254 759 159 461</strong></p>
-          <p><strong>🔗 <a href="#" style="color:var(--link)">linkedin.com/in/richard-otieno</a></strong></p>
+          <p><strong>🔗 <a href="https://www.linkedin.com/in/richard-otieno-1997ba246" target="_blank" style="color:var(--link)">linkedin.com/in/richard-otieno</a></strong></p>
           <p><strong>🐙 github.com/Ndiege75</strong></p>
-          <a class="resume-btn" href="assets/Richard_Ndiege_Otieno_CV(1).pdf" download="Richard_Ndiege_Otieno_CV(1).pdf">Download Resume</a>
+          <button class="resume-btn" id="contactResumeBtn" style="margin-top: 15px; display: inline-block;">📄 Download My Resume</button>
         </div>
         <div class="card">
           <form id="contactForm" action="https://formspree.io/f/meonrgaq" method="POST">
@@ -396,7 +410,7 @@
   </main>
   <footer>© 2025 Richard Ndiege — Data Science Portfolio | Built with real-time GitHub & interactive charts</footer>
 
-  <!-- Modal for project preview -->
+  <!-- Modal -->
   <div id="projectModal" class="modal">
     <div class="modal-content">
       <span class="close-modal">&times;</span>
@@ -407,6 +421,29 @@
   </div>
 
   <script>
+    // Resume download functionality - using the exact filename: Richard_Ndieg_Otieno_CV(1).pdf
+    function triggerResumeDownload() {
+      const fileName = "Richard_Ndieg_Otieno_CV(1).pdf";
+      // Create a temporary anchor element
+      const link = document.createElement('a');
+      link.href = fileName;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Fallback alert if file doesn't exist (helpful for debugging)
+      setTimeout(() => {
+        console.log("Resume download attempted for: " + fileName);
+      }, 100);
+    }
+
+    // Attach to both resume buttons
+    const headerBtn = document.getElementById('headerResumeBtn');
+    const contactBtn = document.getElementById('contactResumeBtn');
+    if (headerBtn) headerBtn.addEventListener('click', triggerResumeDownload);
+    if (contactBtn) contactBtn.addEventListener('click', triggerResumeDownload);
+
     // Loader hide
     window.addEventListener('load', () => {
       document.getElementById('loader').style.display = 'none';
@@ -414,7 +451,7 @@
       initRadarChart();
     });
 
-    // scroll progress
+    // Scroll progress
     window.addEventListener('scroll', () => {
       const winScroll = document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - window.innerHeight;
@@ -427,31 +464,33 @@
     const root = document.documentElement;
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) root.setAttribute('data-theme', savedTheme);
-    themeBtn.textContent = root.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
-    themeBtn.addEventListener('click', () => {
-      const curr = root.getAttribute('data-theme');
-      const newTheme = curr === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      themeBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    });
+    if (themeBtn) themeBtn.textContent = root.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const curr = root.getAttribute('data-theme');
+        const newTheme = curr === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      });
+    }
 
-    // Fade intersection observer
+    // Fade observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
 
-    // Animated Typed.js
+    // Typed.js
     new Typed('#typed-text', {
       strings: ['Aspiring Data Scientist 📊', 'Analytics Engineer 📈', 'ML Problem Solver 🤖', 'Real-time Data Enthusiast ⚡'],
       typeSpeed: 55, backSpeed: 35, loop: true
     });
 
-    // Projects Data (advanced)
+    // Projects Data
     const projectsData = [
-      { title: "House Price Prediction (Nairobi)", desc: "ML regression model using location, bedrooms, and sqft. Achieved R² 0.86.", tools: "Python, XGBoost, Pandas", category: "data", img: "https://picsum.photos/id/104/400/200", chartType: "bar" },
-      { title: "Bike Rental Demand Forecast", desc: "Time series (SARIMA, Prophet) using weather & holiday data.", tools: "Statsmodels, Matplotlib", category: "data", img: "https://picsum.photos/id/20/400/200", chartType: "line" },
+      { title: "House Price Prediction (Nairobi)", desc: "ML regression model using location, bedrooms, and sqft. Achieved R² 0.86.", tools: "Python, XGBoost, Pandas", category: "data", img: "https://picsum.photos/id/104/400/200" },
+      { title: "Bike Rental Demand Forecast", desc: "Time series (SARIMA, Prophet) using weather & holiday data.", tools: "Statsmodels, Matplotlib", category: "data", img: "https://picsum.photos/id/20/400/200" },
       { title: "Student Performance Predictor", desc: "Classification model to identify at-risk students, + PowerBI dashboard.", tools: "R, SPSS, PowerBI", category: "ai", img: "https://picsum.photos/id/26/400/200" },
       { title: "Social Media Performance Dashboard", desc: "Multi-platform analytics (Facebook, IG, Twitter) with engagement KPIs.", tools: "Python, Plotly, PowerBI", category: "web", img: "https://picsum.photos/id/96/400/200" },
       { title: "Real-time Ambulance Route Optimizer (Demo)", desc: "Kafka streaming + Dijkstra simulation for emergency response.", tools: "Kafka, Python, Folium", category: "ai", img: "https://picsum.photos/id/15/400/200" },
@@ -460,6 +499,7 @@
 
     function renderProjects(filter = "all") {
       const container = document.getElementById('projectsGrid');
+      if (!container) return;
       const filtered = filter === "all" ? projectsData : projectsData.filter(p => p.category === filter);
       container.innerHTML = filtered.map((proj, idx) => `
         <div class="project-card card" data-category="${proj.category}">
@@ -470,10 +510,10 @@
           <button class="preview-btn" data-index="${idx}" style="margin-top:12px; background:var(--accent); border:none; padding:6px 12px; border-radius:30px; color:white; cursor:pointer;">🔍 Preview Insight</button>
         </div>
       `).join('');
-      // attach preview events
+      
       document.querySelectorAll('.preview-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-          const idx = btn.getAttribute('data-index');
+          const idx = parseInt(btn.getAttribute('data-index'));
           const proj = filtered[idx];
           showModal(proj);
         });
@@ -482,21 +522,30 @@
 
     function showModal(proj) {
       const modal = document.getElementById('projectModal');
+      if (!modal) return;
       document.getElementById('modalTitle').innerText = proj.title;
       document.getElementById('modalDesc').innerHTML = `${proj.desc}<br><strong>Tech stack:</strong> ${proj.tools}`;
       modal.style.display = 'flex';
-      // optional chart preview
       const ctx = document.getElementById('modalChart')?.getContext('2d');
-      if (window.modalChartInstance) window.modalChartInstance.destroy();
-      window.modalChartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: { labels: ['Accuracy', 'Precision', 'Recall'], datasets: [{ label: 'Model Performance', data: [88, 84, 82], backgroundColor: '#3b82f6' }] }
-      });
+      if (ctx) {
+        if (window.modalChartInstance) window.modalChartInstance.destroy();
+        window.modalChartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: { labels: ['Accuracy', 'Precision', 'Recall'], datasets: [{ label: 'Model Performance', data: [88, 84, 82], backgroundColor: '#3b82f6' }] }
+        });
+      }
     }
-    document.querySelector('.close-modal')?.addEventListener('click', () => document.getElementById('projectModal').style.display = 'none');
-    window.addEventListener('click', (e) => { if (e.target === document.getElementById('projectModal')) document.getElementById('projectModal').style.display = 'none'; });
 
-    // filter buttons
+    document.querySelector('.close-modal')?.addEventListener('click', () => {
+      const modal = document.getElementById('projectModal');
+      if (modal) modal.style.display = 'none';
+    });
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('projectModal');
+      if (e.target === modal) modal.style.display = 'none';
+    });
+
+    // Filter buttons
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -506,7 +555,6 @@
     });
     renderProjects('all');
 
-    // progress bars animation on scroll
     function initProgressBars() {
       const progressBars = document.querySelectorAll('.progress-fill');
       const animate = () => {
@@ -522,19 +570,20 @@
       animate();
     }
 
-    // Radar chart (skills overview)
     function initRadarChart() {
       const ctx = document.getElementById('skillsRadarChart')?.getContext('2d');
-      if (ctx) new Chart(ctx, {
-        type: 'radar',
-        data: { labels: ['Python', 'ML', 'SQL', 'Visualization', 'Big Data', 'Statistics'], datasets: [{ label: 'Proficiency', data: [88, 82, 85, 80, 72, 90], backgroundColor: 'rgba(59,130,246,0.2)', borderColor: '#1e3d59', pointBackgroundColor: '#1e3d59' }] },
-        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' } } }
-      });
+      if (ctx) {
+        new Chart(ctx, {
+          type: 'radar',
+          data: { labels: ['Python', 'ML', 'SQL', 'Visualization', 'Big Data', 'Statistics'], datasets: [{ label: 'Proficiency', data: [88, 82, 85, 80, 72, 90], backgroundColor: 'rgba(59,130,246,0.2)', borderColor: '#1e3d59', pointBackgroundColor: '#1e3d59' }] },
+          options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' } } }
+        });
+      }
     }
 
-    // Live GitHub repos fetch (dynamic)
     async function fetchGitHubRepos() {
       const container = document.getElementById('githubReposContainer');
+      if (!container) return;
       container.innerHTML = '<p>Loading latest projects from GitHub...</p>';
       try {
         const res = await fetch('https://api.github.com/users/Ndiege75/repos?sort=updated&per_page=4');
@@ -555,20 +604,13 @@
     }
     fetchGitHubRepos();
 
-    // Resume download tracking simulation (optional)
-    document.querySelectorAll('#fakeResumeBtn, .resume-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert("📄 Resume demo: Richard_Ndiege_Otieno_CV(1).pdf would start download. In production, host actual PDF.");
-        // you could integrate download counter
-      });
-    });
-
     // Particles config
-    particlesJS("particles-js", {
-      particles: { number: { value: 40 }, color: { value: "#3b82f6" }, shape: { type: "circle" }, opacity: { value: 0.3 }, size: { value: 2 }, move: { speed: 0.8 } },
-      interactivity: { events: { onhover: { enable: true, mode: "repulse" } } }
-    });
+    if (typeof particlesJS !== 'undefined') {
+      particlesJS("particles-js", {
+        particles: { number: { value: 40 }, color: { value: "#3b82f6" }, shape: { type: "circle" }, opacity: { value: 0.3 }, size: { value: 2 }, move: { speed: 0.8 } },
+        interactivity: { events: { onhover: { enable: true, mode: "repulse" } } }
+      });
+    }
   </script>
 </body>
 </html>
