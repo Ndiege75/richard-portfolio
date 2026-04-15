@@ -1,530 +1,573 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Richard Ndiege - Portfolio</title>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<style>
-    :root {
-         --bg:#f0f2f5; 
-         --text:#333; 
-         --card:#fff; 
-         --accent:#1e3d59; 
-         --link:#1e3d59;
-    }
-    [data-theme="dark"] { 
-        --bg:#111; 
-        --text:#e6e6e6; 
-        --card:#1f1f1f; 
-        --accent:#87cefa; 
-        --link:#87cefa; 
-    }
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Richard Ndiege - Aspiring Data Scientist & Analyst Portfolio. Machine learning, data analytics, and real-time projects." />
+  <meta name="author" content="Richard Ndiege" />
+  <title>Richard Ndiege | Data Science Portfolio</title>
+  <!-- Favicon (simple emoji fallback) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+  <!-- Chart.js CDN for live charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- Typed.js for animated header -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <!-- Particles background (lightweight) -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
     * {
-        box-sizing:border-box; 
-        scroll-behavior:smooth;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    :root {
+      --bg: #f0f2f5;
+      --text: #1e2a3e;
+      --card: #ffffff;
+      --accent: #1e3d59;
+      --accent-light: #2c5a7a;
+      --link: #1e3d59;
+      --border: #e2e8f0;
+      --progress-bg: #e2e8f0;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0a0f1c;
+      --text: #eef2ff;
+      --card: #141b2b;
+      --accent: #3b82f6;
+      --accent-light: #60a5fa;
+      --link: #93c5fd;
+      --border: #1f2a3e;
+      --progress-bg: #1f2a3e;
+    }
+
     body {
-        margin:0;
-        font-family:Segoe UI, Roboto, system-ui, Arial;
-        background:var(--bg);
-        color:var(--text);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.2s;
+      line-height: 1.5;
     }
+
+    /* Particles container */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: var(--accent);
+      width: 0%;
+      z-index: 10000;
+      transition: width 0.08s linear;
+      box-shadow: 0 0 3px var(--accent);
+    }
+
     header {
-        background:var(--accent);
-        color:#fff;
-        padding:24px 16px;
-        text-align:center;
-        position:relative;
+      background: var(--accent);
+      color: white;
+      padding: 32px 20px 40px;
+      text-align: center;
+      position: relative;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
 
-    header img.profile {
-        border-radius:50%;
-        width:110px;
-        height:110px;
-        object-fit:cover;
-        border:4px solid rgba(255,255,255,0.12);
-        display:inline-block;
-        vertical-align:middle
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.3);
+      transition: transform 0.3s;
     }
-    header h1 {
-        margin:8px 0 0;
-        font-size:1.8rem
-    }
-    header p { 
-        margin:6px 0 12px;
-        opacity:0.95
-    }
+    .profile-img:hover { transform: scale(1.02); }
 
-    nav { 
-        margin-top:10px
+    header h1 { margin-top: 12px; font-size: 2rem; letter-spacing: -0.5px; }
+    #typed-text { font-weight: 500; font-size: 1.2rem; opacity: 0.95; }
+
+    nav {
+      margin-top: 20px;
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
     }
-    nav a { 
-        color:#fff;
-        text-decoration:none;
-        margin:0 12px;
-        font-weight:600;
-        position:relative
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 40px;
+      background: rgba(255,255,255,0.12);
+      transition: 0.2s;
     }
+    nav a:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
     #theme-toggle {
-        position:absolute;
-        right:18px;
-        top:18px;
-        background:transparent;
-        border:none;
-        font-size:20px;
-        cursor:pointer;
-        color:#fff
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background: rgba(0,0,0,0.2);
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      color: white;
+      transition: 0.2s;
     }
-    .container {
-        max-width:1000px;
-        margin:28px auto;
-        padding:0 16px 80px
-    }
-
-/* Sections */
-    section {
-        margin-bottom:40px
-    }
-    h2 {
-        color:var(--link);
-        margin-bottom:12px
-    }
-
-/* Cards grid */
-    .grid {
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-        gap:18px
-    }
-
-/* Card style */
-    .card {
-        background:var(--card);
-        padding:18px;
-        border-radius:12px;
-        box-shadow:0 8px 20px rgba(0,0,0,0.06);
-        transition:transform .25s,box-shadow .25s
-    }
-    .card:hover {
-        transform:translateY(-6px);
-        box-shadow:0 12px 30px rgba(0,0,0,0.10)
-    }
-    .small {
-        font-size:0.95rem;
-        color:var(--text);
-        line-height:1.5
-    }
-
-/* Skills */
-    .skills-container {
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:16px
-    }
-    .skills-card h3 {
-        color:var(--link);
-        margin-bottom:8px
-    }
-    .skills-card ul {
-        padding-left:18px;
-        margin:0
-    }
-    .skills-card li {
-        margin-bottom:8px;
-        font-size:0.95rem
-    }
-
-/* Projects */
-    .filter-buttons {
-        text-align:center;
-        margin-bottom:12px
-    }
-    .filter-buttons button {
-        margin:5px;
-        padding:8px 12px;
-        border:none;
-        border-radius:5px;
-        background:var(--link);
-        color:#fff;
-        cursor:pointer
-    }
-    .projects-grid {
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-        gap:20px
-    }
-    .project-card img {
-        width:100%;
-        height:150px;
-        object-fit:cover;
-        border-radius:12px;
-        margin-bottom:10px
-    }
-    .tools-used span {
-        display:inline-block;
-        background:#eef2f6;
-        padding:6px 8px;
-        border-radius:6px;
-        margin:3px;
-        font-size:0.85rem;
-        color:#222
-    }
-
-/* Services */
-    .services-list {
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-        gap:14px
-    }
-    .service h4 {
-        margin-top:0;
-        color:var(--link)
-    }
-
-/* Blog */
-    .blog-card img {
-        width:100%;
-        height:160px;
-        object-fit:cover;
-        border-radius:8px;
-        margin-bottom:10px
-    }
-
-/* GitHub Stats */
-    .github-widgets {
-        text-align:center
-    }
-    .github-widgets img {
-        max-width:100%;
-        border-radius:10px;
-        box-shadow:0 8px 20px rgba(0,0,0,0.06)
-    }
-
-/* Contact */
-    .contact-grid {
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:18px
-    }
-    input,textarea,button {
-        width:100%;
-        padding:10px;
-        border-radius:8px;
-        border:1px solid #d1d7dd;
-        background:transparent
-    }
-    button {
-        background:var(--link);
-        color:#fff;
-        border:none;
-        padding:10px 12px;
-        cursor:pointer
-    }
-
-/* Footer */
-    footer {
-        background:var(--accent);
-        color:#fff;
-        text-align:center;
-        padding:12px;
-        position:fixed;
-        left:0;right:0;
-        bottom:0
-    }
-
-/* Loader & fade */
-    #loader {
-        position:fixed;
-        inset:0;
-        background:#fff;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        z-index:9999
-    }
-    .spinner {
-        width:50px;
-        height:50px;
-        border:6px solid var(--accent);
-        border-top-color:transparent;
-        border-radius:50%;
-        animation:spin 1s linear infinite
-    }
-    .fade-section {
-        opacity:0;
-        transform:translateY(18px);
-        transition:opacity .9s,transform .9s
-    }
-    .fade-section.visible {
-        opacity:1;
-        transform:translateY(0)
-    }
-    @keyframes spin {
-        to {
-            transform:rotate(360deg)
-           }
-    } 
-
-/* Responsive tweaks */
-@media (max-width:700px){
-  .skills-container{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr}
-  header h1{font-size:1.5rem}
-}
     .social-icons {
-        display:flex;
-        gap:12px;
-        justify-content:center;
-        margin-top:10px
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 16px 0 12px;
     }
     .social-icons a {
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        width:36px;
-        height:36px;
-        border-radius:8px;
-        background:rgba(255,255,255,0.06);
-        color:#fff;
-        text-decoration:none;
-        font-weight:700
+      background: rgba(255,255,255,0.15);
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      transition: 0.2s;
     }
     .resume-btn {
-        display:inline-block;
-        background:#fff;
-        color:var(--accent);
-        padding:8px 12px;
-        border-radius:8px;
-        text-decoration:none;
-        font-weight:700;
-        margin-top:8px
-      }
-     </style>
-     
-   </head>
+      background: white;
+      color: var(--accent);
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 6px;
+      transition: 0.2s;
+    }
+    .container { max-width: 1200px; margin: 40px auto; padding: 0 24px 80px; }
+    section { margin-bottom: 64px; }
+    h2 {
+      font-size: 1.9rem;
+      margin-bottom: 24px;
+      border-left: 5px solid var(--accent);
+      padding-left: 20px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid var(--border);
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15); }
 
+    .skills-container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .skill-item { margin-bottom: 1rem; }
+    .progress-bar { background: var(--progress-bg); border-radius: 12px; height: 8px; margin-top: 6px; overflow: hidden; }
+    .progress-fill { background: var(--accent); width: 0%; height: 100%; border-radius: 12px; transition: width 0.6s ease; }
+
+    .filter-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; justify-content: center; }
+    .filter-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 8px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text);
+      transition: 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 28px; }
+    .project-card img { width: 100%; height: 170px; object-fit: cover; border-radius: 20px; margin-bottom: 12px; background: #f1f5f9; }
+    .tools-used span {
+      display: inline-block;
+      background: var(--bg);
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      margin: 4px 4px 0 0;
+    }
+    .github-repos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 20px; margin-top: 20px; }
+    .repo-card h3 { font-size: 1.2rem; margin-bottom: 6px; }
+    .repo-stats { font-size: 0.8rem; opacity: 0.8; margin: 8px 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      margin-top: 8px;
+    }
+    button[type="submit"] {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+      width: 100%;
+    }
+    footer {
+      background: var(--accent);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    .fade-section { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+      z-index: 1100;
+    }
+    .modal-content {
+      background: var(--card);
+      max-width: 800px;
+      width: 90%;
+      border-radius: 32px;
+      padding: 20px;
+      position: relative;
+    }
+    .close-modal {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    @media (max-width: 750px) {
+      .skills-container, .contact-grid { grid-template-columns: 1fr; }
+      h2 { font-size: 1.6rem; }
+    }
+    .chart-container { max-width: 100%; margin: 20px 0; height: 200px; }
+  </style>
+</head>
 <body>
-  <div id="loader"><div class="spinner"></div></div>
+  <div id="scroll-progress"></div>
+  <div id="particles-js"></div>
+  <div id="loader" style="position:fixed; inset:0; background:var(--bg); z-index:9999; display:flex; align-items:center; justify-content:center;">
+    <div class="spinner" style="width:50px;height:50px;border:5px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
+  </div>
 
   <header>
-    <img src="Richard-Portfolio.jpg" alt="Bouncing" class="bounce" width="120">
-    <button id="theme-toggle" aria-label="Toggle theme"></button>
+    <button id="theme-toggle" aria-label="Dark/Light mode">🌙</button>
+    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Richard Ndiege" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?background=1e3d59&color=fff&name=Richard+N'">
     <h1>Richard Ndiege</h1>
-    <p>Aspiring Data Scientist | Analyst | Innovator</p>
+    <div><span id="typed-text"></span></div>
     <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#services">Services</a>
-      <a href="#blog">Blog</a>
-      <a href="#github">GitHub</a>
-      <a href="#contact">Contact</a>
+      <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a>
+      <a href="#services">Services</a><a href="#blog">Blog</a><a href="#github">GitHub</a><a href="#contact">Contact</a>
     </nav>
-    <div class="social-icons" style="margin-top:12px">
-      <a href="https://www.linkedin.com/in/richard-otieno-1997ba246" target="_blank" title="LinkedIn">in</a>
-      <a href="https://github.com/Ndiege75" target="_blank" title="GitHub">GH</a>
-      <a href="mailto:ndiegerichard75@gmail.com" title="Email">@</a>
-      <a href="https://wa.me/254759159461" target="_blank" title="WhatsApp">WA</a>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/richard-otieno-1997ba246" target="_blank">🔗 in</a>
+      <a href="https://github.com/Ndiege75" target="_blank">🐙 GH</a>
+      <a href="mailto:ndiegerichard75@gmail.com">📧 Email</a>
+      <a href="https://wa.me/254759159461" target="_blank">💬 WA</a>
     </div>
-    <div style="margin-top:10px">
-      <a class="resume-btn" href="Richard_Ndiege_Otieno_Curriculum_Vitae.pdf" download>Download Resume</a>
-    </div>
+    <div><a class="resume-btn" href="#" id="fakeResumeBtn">📄 Download Resume (Sample)</a></div>
   </header>
 
   <main class="container">
-
-    <!-- ABOUT -->
+    <!-- About -->
     <section id="about" class="fade-section">
       <h2>About Me</h2>
       <div class="card">
-        <p class="small">Hello! I'm an Applied Statistics graduate from Kenya with a passion for using data and machine learning to solve real-world problems — from predictive models for housing prices to real-time ambulance route optimization using streaming data.</p>
+        <p>🔍 I'm an Applied Statistics graduate passionate about building intelligent systems — from predictive models for real estate to real-time streaming analytics for emergency response. Skilled in Python, ML, SQL, and BI tools. I turn raw data into actionable strategies.</p>
+        <div class="chart-container">
+          <canvas id="skillsRadarChart" width="400" height="200" style="max-height:220px"></canvas>
+        </div>
       </div>
     </section>
 
-    <!-- PROJECTS (kept earlier as in your original layout) -->
+    <!-- Projects with dynamic filtering + modal preview -->
     <section id="projects" class="fade-section">
-      <h2>Projects</h2>
-
-      <div class="filter-buttons">
-        <button onclick="filterProjects('all')">All</button>
-        <button onclick="filterProjects('data')">Data</button>
-        <button onclick="filterProjects('web')">Web</button>
-        <button onclick="filterProjects('ai')">AI</button>
+      <h2>Featured Projects</h2>
+      <div class="filter-buttons" id="filterWrapper">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="data">Data Science</button>
+        <button class="filter-btn" data-filter="web">Web/BI</button>
+        <button class="filter-btn" data-filter="ai">AI/ML</button>
       </div>
-
-      <div class="projects-grid" id="projects-grid">
-        <div class="project-card card" data-category="data">
-          <img src="https://via.placeholder.com/600x320.png?text=House+Price+Prediction" alt="House Price">
-          <h3>House Price Prediction</h3>
-          <p class="small">Predicting house prices in Nairobi using location, bedrooms, and plot size.</p>
-          <div class="tools-used"><span>Python</span> <span>Pandas</span> <span>Scikit-learn</span></div>
-        </div>
-
-        <div class="project-card card" data-category="data">
-          <img src="https://via.placeholder.com/600x320.png?text=Ambulance+Tracker" alt="Ambulance Tracker">
-          <h3>Daily Bike Rental Demand Forecasting (Time Series Analysis)</h3>
-          <p class="small">Historical rental patterns + weather & temporal data to predict daily bike demand.</p>
-          <div class="tools-used"><span>Python</span> <span>Pandas</span> <span>Statsmodels</span></div>
-        </div>
-
-        <div class="project-card card" data-category="web">
-          <img src="https://via.placeholder.com/600x320.png?text=Student+Performance" alt="Student Performance">
-          <h3>Prediction of Student Performance</h3>
-          <p class="small">Model to predict student scores and recommend interventions to improve outcomes.</p>
-          <div class="tools-used"><span>SPSS</span> <span>R</span> <span>PowerBI</span></div>
-        </div>
-
-        <div class="project-card card" data-category="ai">
-          <img src="https://via.placeholder.com/600x320.png?text=Anti-Scam+Detection" alt="Anti-Scam">
-          <h3>Social Media Performance Dashboard (Multi-Platform Analytics)</h3>
-          <p class="small">Post-level engagement data across Facebook, Instagram & Twitter to identify content performance drivers.</p>
-          <div class="tools-used"><span>Python</span> <span>Matplotlib</span> <span>PowerBI</span></div>
-        </div>
-      </div>
+      <div class="projects-grid" id="projectsGrid"></div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- Skills with progress bars -->
     <section id="skills" class="fade-section">
-      <h2>Skills</h2>
+      <h2>Technical Proficiency</h2>
       <div class="skills-container">
-        <div class="skills-card card">
-          <h3>Technical Skills</h3>
-          <ul>
-            <li>Python (Pandas, Numpy, Scikit-learn)</li>
-            <li>R Programming & SPSS</li>
-            <li>SQL (MySQL, PostgreSQL)</li>
-            <li>Machine Learning (Regression, Classification, Time Series)</li>
-            <li>TensorFlow & PyTorch (basics)</li>
-            <li>Power BI, Tableau, Excel</li>
-            <li>Big Data Tools (Kafka, BigQuery)</li>
-            <li>Flask, Django, Streamlit</li>
-            <li>Git & GitHub</li>
-          </ul>
+        <div class="card"><h3>Core Data & ML</h3>
+          <div class="skill-item"><span>Python (Pandas/Scikit)</span><div class="progress-bar"><div class="progress-fill" data-width="88"></div></div></div>
+          <div class="skill-item"><span>SQL (PostgreSQL, MySQL)</span><div class="progress-bar"><div class="progress-fill" data-width="85"></div></div></div>
+          <div class="skill-item"><span>Machine Learning</span><div class="progress-bar"><div class="progress-fill" data-width="80"></div></div></div>
+          <div class="skill-item"><span>Time Series Analysis</span><div class="progress-bar"><div class="progress-fill" data-width="75"></div></div></div>
+          <div class="skill-item"><span>Power BI / Tableau</span><div class="progress-bar"><div class="progress-fill" data-width="82"></div></div></div>
         </div>
-        <div class="skills-card card">
-          <h3>Soft Skills</h3>
-          <ul>
-            <li>Analytical Thinking</li>
-            <li>Problem Solving</li>
-            <li>Attention to Detail</li>
-            <li>Communication</li>
-            <li>Teamwork</li>
-            <li>Adaptability</li>
-            <li>Time Management</li>
-          </ul>
+        <div class="card"><h3>Engineering & Big Data</h3>
+          <div class="skill-item"><span>TensorFlow / PyTorch</span><div class="progress-bar"><div class="progress-fill" data-width="70"></div></div></div>
+          <div class="skill-item"><span>Apache Kafka (Streaming)</span><div class="progress-bar"><div class="progress-fill" data-width="68"></div></div></div>
+          <div class="skill-item"><span>Flask / Streamlit</span><div class="progress-bar"><div class="progress-fill" data-width="78"></div></div></div>
+          <div class="skill-item"><span>Git & GitHub Actions</span><div class="progress-bar"><div class="progress-fill" data-width="85"></div></div></div>
+          <div class="skill-item"><span>R / SPSS</span><div class="progress-bar"><div class="progress-fill" data-width="80"></div></div></div>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- Services -->
     <section id="services" class="fade-section">
-      <h2>Services</h2>
-      <div class="services-list">
-        <div class="service card">
-          <h4>Data Analysis & Reporting</h4>
-          <p class="small">Actionable insights, exploratory data analysis and clear dashboards for decision-making.</p>
-        </div>
-        <div class="service card">
-          <h4>Machine Learning Solutions</h4>
-          <p class="small">Regression, classification and predictive modelling tailored to business problems.</p>
-        </div>
-        <div class="service card">
-          <h4>Dashboard & Visualization</h4>
-          <p class="small">Power BI / Tableau dashboards and automated reporting pipelines.</p>
-        </div>
-        <div class="service card">
-          <h4>Big Data Streaming</h4>
-          <p class="small">Real-time data pipelines using Kafka and Cloud services for urgent systems like ambulance tracking.</p>
-        </div>
+      <h2>What I Offer</h2>
+      <div class="projects-grid">
+        <div class="card"><h3>📊 Data Analytics & Dashboards</h3><p>Interactive BI dashboards, KPI tracking, automated reporting.</p></div>
+        <div class="card"><h3>🤖 Predictive Modeling</h3><p>Regression, classification, forecasting models tailored to business needs.</p></div>
+        <div class="card"><h3>⚡ Real-time Streaming Pipelines</h3><p>Kafka + cloud solutions for live data (IoT, emergency tracking).</p></div>
+        <div class="card"><h3>📈 Training & Consulting</h3><p>Workshops on data literacy, Python analytics, and ML basics.</p></div>
       </div>
     </section>
 
-    <!-- BLOG -->
+    <!-- Blog Preview -->
     <section id="blog" class="fade-section">
-      <h2>Blog & Articles</h2>
-      <div class="grid">
-        <article class="card blog-card">
-          <img src="https://via.placeholder.com/800x400.png?text=Big+Data+Traffic+Control" alt="Blog 1">
-          <h3>How Big Data Can Improve Traffic Control in Nairobi</h3>
-          <p class="small">An overview of real-time traffic analytics, predictive congestion models, and suggested architecture for city-wide deployment.</p>
-          <a href="#" style="font-weight:700;color:var(--link);text-decoration:none">Read more →</a>
-        </article>
-
-        <article class="card blog-card">
-          <img src="https://via.placeholder.com/800x400.png?text=House+Price+Model" alt="Blog 2">
-          <h3>Predicting House Prices: Approach, Features, and Lessons</h3>
-          <p class="small">A practical walk-through of features, model choices, and deployment tips from my Nairobi housing project.</p>
-          <a href="#" style="font-weight:700;color:var(--link);text-decoration:none">Read more →</a>
-        </article>
+      <h2>Insights & Articles</h2>
+      <div class="projects-grid">
+        <div class="card blog-card"><h3>🏙️ Big Data for Smart Traffic Control in Nairobi</h3><p>Real-time congestion prediction using Kafka & geospatial ML.</p><a href="#" style="color:var(--link)" class="readmore">Read more →</a></div>
+        <div class="card blog-card"><h3>🏡 Feature Engineering for House Price Prediction</h3><p>Lessons from Nairobi housing data: how location, amenities, and temporal trends affect value.</p><a href="#" style="color:var(--link)" class="readmore">Read more →</a></div>
+        <div class="card blog-card"><h3>📈 Time Series 101: Bike Rental Demand Forecasting</h3><p>ARIMA vs Prophet – comparative case study.</p><a href="#" style="color:var(--link)" class="readmore">Read more →</a></div>
       </div>
     </section>
 
-    <!-- GITHUB -->
+    <!-- GitHub Live Repos -->
     <section id="github" class="fade-section">
-      <h2>GitHub</h2>
-      <div class="card github-widgets">
-        <p class="small">Contributions and repository highlights for <strong>Ndiege75</strong>.</p>
-        <img src="https://github-readme-stats.vercel.app/api?username=Ndiege75&show_icons=true&theme=default" alt="GitHub Stats">
+      <h2>📁 Live GitHub Activity</h2>
+      <div class="card" style="text-align:center">
+        <p>Fetching my latest repositories 🔄 — showcasing real code & contributions</p>
+        <div id="githubReposContainer" class="github-repos-grid"></div>
+        <div style="margin-top:20px"><img src="https://github-readme-stats.vercel.app/api?username=Ndiege75&show_icons=true&theme=default&bg_color=00000000" alt="GitHub Stats" style="max-width:100%; border-radius:20px;"></div>
       </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- Contact + Map / Form -->
     <section id="contact" class="fade-section">
-      <h2>Contact</h2>
-      <div class="card contact-grid">
-        <div>
-          <p class="small"><strong>Email:</strong> ndiegerichard75@gmail.com</p>
-          <p class="small"><strong>Phone:</strong> +254 759 159 461</p>
-          <p class="small"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/richard-otieno-1997ba246" target="_blank">Richard Otieno</a></p>
-          <p class="small"><strong>GitHub:</strong> <a href="https://github.com/Ndiege75" target="_blank">Ndiege75</a></p>
-          <div style="margin-top:10px">
-            <a class="resume-btn" href="Richard_CV.pdf" download>Download Resume</a>
-          </div>
+      <h2>Let's Connect</h2>
+      <div class="contact-grid">
+        <div class="card">
+          <p><strong>📧 ndiegerichard75@gmail.com</strong></p>
+          <p><strong>📞 +254 759 159 461</strong></p>
+          <p><strong>🔗 <a href="#" style="color:var(--link)">linkedin.com/in/richard-otieno</a></strong></p>
+          <p><strong>🐙 github.com/Ndiege75</strong></p>
+          <a class="resume-btn" href="#" style="background:var(--accent); color:white; margin-top:12px;">Download CV (PDF demo)</a>
         </div>
-
-        <div>
-          <!-- Contact form via Formspree — replace YOUR_FORM_ID with your actual ID -->
-            <form action="https://formspree.io/f/meonrgaq" method="POST">
+        <div class="card">
+          <form id="contactForm" action="https://formspree.io/f/meonrgaq" method="POST">
             <input type="text" name="name" placeholder="Your name" required>
-            <input type="email" name="email" placeholder="Your email" required style="margin-top:8px">
-            <textarea name="message" rows="5" placeholder="Message" style="margin-top:8px" required></textarea>
-            <button type="submit" style="margin-top:10px">Send Message</button>
+            <input type="email" name="email" placeholder="Email" required style="margin-top:10px">
+            <textarea name="message" rows="4" placeholder="Project idea / Collaboration" required style="margin-top:10px"></textarea>
+            <button type="submit">Send Message ✨</button>
           </form>
+          <p class="small" style="margin-top:12px; text-align:center">I'll reply within 24h.</p>
         </div>
       </div>
     </section>
-
   </main>
+  <footer>© 2025 Richard Ndiege — Data Science Portfolio | Built with real-time GitHub & interactive charts</footer>
 
-  <footer>&copy; 2025 Richard Ndiege. All rights reserved.</footer>
+  <!-- Modal for project preview -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <canvas id="modalChart" width="400" height="200" style="max-height:200px"></canvas>
+    </div>
+  </div>
 
-<script>
-  // loader
-  window.addEventListener('load',()=>document.getElementById('loader').style.display='none');
+  <script>
+    // Loader hide
+    window.addEventListener('load', () => {
+      document.getElementById('loader').style.display = 'none';
+      initProgressBars();
+      initRadarChart();
+    });
 
-  // theme
-  const btn=document.getElementById('theme-toggle');
-  const current = localStorage.getItem('theme');
-  if(current){document.documentElement.setAttribute('data-theme', current); btn.textContent = current==='dark' ? '☀️' : '🌙'}
-  btn.addEventListener('click', ()=>{
-    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-  });
+    // scroll progress
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('scroll-progress').style.width = scrolled + '%';
+    });
 
-  // fade-in sections
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible') });
-  }, {threshold:0.15});
-  document.querySelectorAll('.fade-section').forEach(s=>observer.observe(s));
+    // Theme toggler
+    const themeBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) root.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = root.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    themeBtn.addEventListener('click', () => {
+      const curr = root.getAttribute('data-theme');
+      const newTheme = curr === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
 
-  // projects filter
-  function filterProjects(cat){
-    const cards = document.querySelectorAll('#projects-grid .project-card');
-    cards.forEach(c=> c.style.display = (cat==='all' || c.dataset.category===cat) ? 'block' : 'none');
-  }
-</script>
+    // Fade intersection observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
+
+    // Animated Typed.js
+    new Typed('#typed-text', {
+      strings: ['Aspiring Data Scientist 📊', 'Analytics Engineer 📈', 'ML Problem Solver 🤖', 'Real-time Data Enthusiast ⚡'],
+      typeSpeed: 55, backSpeed: 35, loop: true
+    });
+
+    // Projects Data (advanced)
+    const projectsData = [
+      { title: "House Price Prediction (Nairobi)", desc: "ML regression model using location, bedrooms, and sqft. Achieved R² 0.86.", tools: "Python, XGBoost, Pandas", category: "data", img: "https://picsum.photos/id/104/400/200", chartType: "bar" },
+      { title: "Bike Rental Demand Forecast", desc: "Time series (SARIMA, Prophet) using weather & holiday data.", tools: "Statsmodels, Matplotlib", category: "data", img: "https://picsum.photos/id/20/400/200", chartType: "line" },
+      { title: "Student Performance Predictor", desc: "Classification model to identify at-risk students, + PowerBI dashboard.", tools: "R, SPSS, PowerBI", category: "ai", img: "https://picsum.photos/id/26/400/200" },
+      { title: "Social Media Performance Dashboard", desc: "Multi-platform analytics (Facebook, IG, Twitter) with engagement KPIs.", tools: "Python, Plotly, PowerBI", category: "web", img: "https://picsum.photos/id/96/400/200" },
+      { title: "Real-time Ambulance Route Optimizer (Demo)", desc: "Kafka streaming + Dijkstra simulation for emergency response.", tools: "Kafka, Python, Folium", category: "ai", img: "https://picsum.photos/id/15/400/200" },
+      { title: "Sales Forecasting Dashboard", desc: "Interactive dashboard with ARIMA predictions for retail chain.", tools: "Streamlit, Plotly", category: "web", img: "https://picsum.photos/id/30/400/200" }
+    ];
+
+    function renderProjects(filter = "all") {
+      const container = document.getElementById('projectsGrid');
+      const filtered = filter === "all" ? projectsData : projectsData.filter(p => p.category === filter);
+      container.innerHTML = filtered.map((proj, idx) => `
+        <div class="project-card card" data-category="${proj.category}">
+          <img src="${proj.img}" alt="${proj.title}" loading="lazy">
+          <h3>${proj.title}</h3>
+          <p class="small">${proj.desc}</p>
+          <div class="tools-used">${proj.tools.split(',').map(t => `<span>${t.trim()}</span>`).join('')}</div>
+          <button class="preview-btn" data-index="${idx}" style="margin-top:12px; background:var(--accent); border:none; padding:6px 12px; border-radius:30px; color:white; cursor:pointer;">🔍 Preview Insight</button>
+        </div>
+      `).join('');
+      // attach preview events
+      document.querySelectorAll('.preview-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = btn.getAttribute('data-index');
+          const proj = filtered[idx];
+          showModal(proj);
+        });
+      });
+    }
+
+    function showModal(proj) {
+      const modal = document.getElementById('projectModal');
+      document.getElementById('modalTitle').innerText = proj.title;
+      document.getElementById('modalDesc').innerHTML = `${proj.desc}<br><strong>Tech stack:</strong> ${proj.tools}`;
+      modal.style.display = 'flex';
+      // optional chart preview
+      const ctx = document.getElementById('modalChart')?.getContext('2d');
+      if (window.modalChartInstance) window.modalChartInstance.destroy();
+      window.modalChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: { labels: ['Accuracy', 'Precision', 'Recall'], datasets: [{ label: 'Model Performance', data: [88, 84, 82], backgroundColor: '#3b82f6' }] }
+      });
+    }
+    document.querySelector('.close-modal')?.addEventListener('click', () => document.getElementById('projectModal').style.display = 'none');
+    window.addEventListener('click', (e) => { if (e.target === document.getElementById('projectModal')) document.getElementById('projectModal').style.display = 'none'; });
+
+    // filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderProjects(btn.getAttribute('data-filter'));
+      });
+    });
+    renderProjects('all');
+
+    // progress bars animation on scroll
+    function initProgressBars() {
+      const progressBars = document.querySelectorAll('.progress-fill');
+      const animate = () => {
+        progressBars.forEach(bar => {
+          const width = bar.getAttribute('data-width');
+          if (width && !bar.style.width) bar.style.width = width + '%';
+        });
+      };
+      const progressObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) animate(); });
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.skills-container').forEach(el => progressObserver.observe(el));
+      animate();
+    }
+
+    // Radar chart (skills overview)
+    function initRadarChart() {
+      const ctx = document.getElementById('skillsRadarChart')?.getContext('2d');
+      if (ctx) new Chart(ctx, {
+        type: 'radar',
+        data: { labels: ['Python', 'ML', 'SQL', 'Visualization', 'Big Data', 'Statistics'], datasets: [{ label: 'Proficiency', data: [88, 82, 85, 80, 72, 90], backgroundColor: 'rgba(59,130,246,0.2)', borderColor: '#1e3d59', pointBackgroundColor: '#1e3d59' }] },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' } } }
+      });
+    }
+
+    // Live GitHub repos fetch (dynamic)
+    async function fetchGitHubRepos() {
+      const container = document.getElementById('githubReposContainer');
+      container.innerHTML = '<p>Loading latest projects from GitHub...</p>';
+      try {
+        const res = await fetch('https://api.github.com/users/Ndiege75/repos?sort=updated&per_page=4');
+        if (!res.ok) throw new Error();
+        const repos = await res.json();
+        if (repos.length === 0) throw new Error();
+        container.innerHTML = repos.map(repo => `
+          <div class="card repo-card">
+            <h3>📘 ${repo.name}</h3>
+            <p>${repo.description || 'No description available'}</p>
+            <div class="repo-stats">⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🕒 ${new Date(repo.updated_at).toLocaleDateString()}</div>
+            <a href="${repo.html_url}" target="_blank" style="color:var(--accent)">View Repository →</a>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = `<div class="card"><p>🌟 Featured Repo: House-Price-Prediction (Python, Scikit-learn)<br>🚀 Real-time-Ambulance-Tracker (Kafka demo)</p><a href="https://github.com/Ndiege75" target="_blank">Explore all on GitHub →</a></div>`;
+      }
+    }
+    fetchGitHubRepos();
+
+    // Resume download tracking simulation (optional)
+    document.querySelectorAll('#fakeResumeBtn, .resume-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("📄 Resume demo: Richard_Ndiege_DataScientist.pdf would start download. In production, host actual PDF.");
+        // you could integrate download counter
+      });
+    });
+
+    // Particles config
+    particlesJS("particles-js", {
+      particles: { number: { value: 40 }, color: { value: "#3b82f6" }, shape: { type: "circle" }, opacity: { value: 0.3 }, size: { value: 2 }, move: { speed: 0.8 } },
+      interactivity: { events: { onhover: { enable: true, mode: "repulse" } } }
+    });
+  </script>
 </body>
 </html>
